@@ -1,0 +1,69 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from "@tailwindcss/vite";
+export default defineNuxtConfig({
+  modules: [
+    "shadcn-nuxt",
+    "@vueuse/nuxt/module",
+    "@nuxt/fonts",
+    "@nuxtjs/supabase",
+  ],
+  compatibilityDate: "2025-07-15",
+
+  css: ["~/assets/css/tailwind.css"],
+  devtools: { enabled: true },
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  fonts: {
+    families: [
+      {
+        name: "Bricolage Grotesque",
+        provider: "google",
+        weights: [600, 700, 800],
+      },
+      { name: "DM Sans", provider: "google", weights: [400, 500, 700] },
+    ],
+  },
+
+  app: {
+    head: {
+      link: [
+        {
+          rel: "icon",
+          type: "image/svg+xml",
+          href: "/logo.svg",
+        },
+      ],
+    },
+  },
+
+  shadcn: {
+    /**
+     * Prefix for all the imported component.
+     * @default "Ui"
+     */
+    prefix: "",
+    /**
+     * Directory that the component lives in.
+     * Will respect the Nuxt aliases.
+     * @link https://nuxt.com/docs/api/nuxt-config#alias
+     * @default "@/components/ui"
+     */
+    componentDir: "@/components/ui",
+  },
+  supabase: {
+    redirect: false, // Set to false if you are writing custom middleware routing
+    cookieOptions: {
+      maxAge: 60 * 60 * 24 * 7, // 1 week session persist duration
+      sameSite: "lax",
+      secure: true,
+    },
+  },
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
+    },
+  },
+});

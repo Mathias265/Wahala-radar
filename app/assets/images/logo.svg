@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 64 64" fill="none">
+  <title>Wahala Radar favicon</title>
+  <circle cx="32" cy="32" r="32" fill="#0B6B3A"/>
+  <circle cx="32" cy="32" r="18" stroke="#FFFFFF" stroke-width="4" opacity="0.8"/>
+  <path d="M32 32 L50 15" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="46" cy="41" r="5" fill="#FFFFFF"/>
+</svg>
