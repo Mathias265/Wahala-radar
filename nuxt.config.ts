@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt/module",
     "@nuxt/fonts",
     "@nuxtjs/supabase",
+    "nuxt-gtag",
   ],
   compatibilityDate: "2025-07-15",
 

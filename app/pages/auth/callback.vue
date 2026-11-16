@@ -37,6 +37,7 @@ definePageMeta({ layout: false });
 
 const { user, initUser } = useAuth();
 const { fetchProfile } = useProfile();
+const { gtag } = useGtag();
 
 onMounted(async () => {
   const started = Date.now();
@@ -56,6 +57,20 @@ onMounted(async () => {
   if (!user.value) {
     await waitMinimum();
     return navigateTo("/", { replace: true });
+  }
+
+  // Track successful sign-in in Google Analytics
+  const authMethod = user.value.app_metadata?.provider || "email";
+  gtag("event", "login", {
+    method: authMethod,
+  });
+
+  // Attach Supabase User ID so GA4 counts unique active users accurately
+  const gtagId = useRuntimeConfig().public.gtag?.id;
+  if (gtagId && user.value.id) {
+    gtag("config", gtagId, {
+      user_id: user.value.id,
+    });
   }
 
   const profile = await fetchProfile(true).catch(() => null);
